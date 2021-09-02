@@ -1,4 +1,4 @@
-# Bored Ape Yacht Club Subgraph
+# Bored Ape Yacht Club Subgraph / API
 
 ![Bored Ape Yach Club Subgraph](header.png)
 
