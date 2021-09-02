@@ -7,7 +7,7 @@ import {
  Token, User
 } from '../generated/schema'
 
-import { log, ipfs, json } from '@graphprotocol/graph-ts'
+import { ipfs, json } from '@graphprotocol/graph-ts'
  
 export function handleTransferApe(event: TransferEvent): void {
  let baseHash = "QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq"
