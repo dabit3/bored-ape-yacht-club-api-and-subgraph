@@ -122,7 +122,7 @@ graph deploy --product hosted-service dabit3/boredapeyachtclub
 }
 ```
 
-#### Query tokens by owner (relational)
+#### Query tokens by owner
 
 ```graphql
 {
@@ -142,6 +142,32 @@ graph deploy --product hosted-service dabit3/boredapeyachtclub
     clothes
     fur
     earring
+  }
+}
+```
+
+#### Relational data (tokens and owners)
+
+```graphql
+{
+  tokens {
+    id
+    tokenID
+    contentURI
+    collection
+    eyes
+    background
+    hat
+    mouth
+    clothes
+    fur
+    earring
+    owner {
+      id
+      tokens {
+        id
+      }
+    }
   }
 }
 ```
