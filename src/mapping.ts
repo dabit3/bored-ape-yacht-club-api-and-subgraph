@@ -20,6 +20,7 @@ export function handleTransferApe(event: TransferEvent): void {
     token.createdAtTimestamp = event.block.timestamp;
     token.collection = "Bored Ape Yacht Club"
   }
+  token.updatedAtTimestamp = event.block.timestamp;
   let tokenContract = TokenContract.bind(event.address);
 
   let baseURI = tokenContract.baseURI()
@@ -109,6 +110,7 @@ export function handleTransferMutant(event: TransferEvent): void {
     token.createdAtTimestamp = event.block.timestamp;
     token.collection = "Mutant Ape Yacht Club"
   }
+  token.updatedAtTimestamp = event.block.timestamp;
 
   let baseURI = "ipfs.io/ipfs" + baseHash
   let contentURI = "ipfs.io/ipfs/" + baseHash + "/" + event.params.tokenId.toString() + ".json";

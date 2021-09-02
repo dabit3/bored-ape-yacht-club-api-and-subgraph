@@ -86,6 +86,23 @@ export class Token extends Entity {
     this.set("createdAtTimestamp", Value.fromBigInt(value));
   }
 
+  get updatedAtTimestamp(): BigInt | null {
+    let value = this.get("updatedAtTimestamp");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set updatedAtTimestamp(value: BigInt | null) {
+    if (value === null) {
+      this.unset("updatedAtTimestamp");
+    } else {
+      this.set("updatedAtTimestamp", Value.fromBigInt(value as BigInt));
+    }
+  }
+
   get collection(): string {
     let value = this.get("collection");
     return value.toString();

@@ -4,6 +4,8 @@
 
 This is a subgraph that enables the indexing and querying of data from the Bored Ape Yacht Club and Mutant Ape Yacht Club NFTs / smart contracts using [The Graph](https://thegraph.com/)
 
+You can perform relational queries, full text search, sorting, and filtering using this API.
+
 ### Using the subgraph
 
 The subgraph is located in the Graph Explorer at [https://thegraph.com/legacy-explorer/subgraph/dabit3/boredapeyachtclub](https://thegraph.com/legacy-explorer/subgraph/dabit3/boredapeyachtclub).
@@ -53,6 +55,120 @@ For instance, my deploy script will look like this:
 ```sh
 graph deploy --product hosted-service dabit3/boredapeyachtclub
 ```
+
+### Queries
+
+#### Basic query
+
+```graphql
+{
+  tokens {
+    id
+    tokenID
+    contentURI
+    collection
+    eyes
+    background
+    hat
+    mouth
+    clothes
+    fur
+    earring
+  }
+}
+```
+
+#### Full Text Search
+
+```sh
+{
+  tokenSearch (text: "Orange") {
+    id
+    tokenID
+    contentURI
+    collection
+    eyes
+    background
+    hat
+    mouth
+    clothes
+    fur
+    earring
+  }
+}
+```
+
+#### Filtering
+
+```sh
+{
+  tokens(
+    where: {
+      collection: "Mutant Ape Yacht Club"
+    }
+  ) {
+    id
+    tokenID
+    contentURI
+    collection
+    eyes
+    background
+    hat
+    mouth
+    clothes
+    fur
+    earring
+  }
+}
+```
+
+#### Query tokens by owner (relational)
+
+```graphql
+{
+  tokens(
+    where: {
+      owner: "0x9056d15c49b19df52ffad1e6c11627f035c0c960"
+    }
+  ) {
+    id
+    tokenID
+    contentURI
+    collection
+    eyes
+    background
+    hat
+    mouth
+    clothes
+    fur
+    earring
+  }
+}
+```
+
+#### Change order direction
+
+```graphql
+{
+  tokens(
+    orderBy: updatedAtTimestamp
+    orderDirection: desc
+  ) {
+    id
+    tokenID
+    contentURI
+    collection
+    eyes
+    background
+    hat
+    mouth
+    clothes
+    fur
+    earring
+  }
+}
+```
+
 
 ### Working with IPFS in a subgraph
 

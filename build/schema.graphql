@@ -18,6 +18,7 @@ type Token @entity {
   contentURI: String!
   baseURI: String
   createdAtTimestamp: BigInt!
+  updatedAtTimestamp: BigInt
   collection: String!
   eyes: String
   background: String
