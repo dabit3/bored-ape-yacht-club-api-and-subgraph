@@ -53,3 +53,20 @@ For instance, my deploy script will look like this:
 ```sh
 graph deploy --product hosted-service dabit3/boredapeyachtclub
 ```
+
+### Working with IPFS in a subgraph
+
+This project can also serve as a useful reference for how to query IPFS from within a subgraph mapping template, using methods like `ipfs.cat` from the [`graph-ts`](https://github.com/graphprotocol/graph-ts) library and how to manage the data once it comes back from IPFS:
+
+```javascript
+let data = ipfs.cat(ipfshash)
+
+let value = json.fromBytes(data!).toObject()
+
+let attributes = value.get('attributes').toArray()
+
+for (let i = 0; i < attributes.length; i++) {
+  let item = attributes[i].toObject()
+  // do stuff
+}
+```
