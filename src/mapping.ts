@@ -111,7 +111,7 @@ export function handleTransferMutant(event: TransferEvent): void {
   }
 
   let baseURI = "ipfs.io/ipfs" + baseHash
-  let contentURI = "ipfs.io/ipfs/" + baseHash + event.params.tokenId.toString() + ".json";
+  let contentURI = "ipfs.io/ipfs/" + baseHash + "/" + event.params.tokenId.toString() + ".json";
 
   token.contentURI = contentURI;
   token.baseURI = baseURI;
