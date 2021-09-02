@@ -7,7 +7,7 @@ import {
  Token, User
 } from '../generated/schema'
 
-import { ipfs, json } from '@graphprotocol/graph-ts'
+import { log, ipfs, json } from '@graphprotocol/graph-ts'
  
 export function handleTransferApe(event: TransferEvent): void {
  let baseHash = "QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq"
@@ -100,7 +100,7 @@ export function handleTransferApe(event: TransferEvent): void {
 
 export function handleTransferMutant(event: TransferEvent): void {
 
- let baseHash = "QmZnJuPwDRSVWrupUQFQyqPKTV9sa5gP4x6sX53ce5WMaZ"
+  let baseHash = "QmZnJuPwDRSVWrupUQFQyqPKTV9sa5gP4x6sX53ce5WMaZ"
   var token = Token.load(event.params.tokenId.toString());
   if (!token) {    
     token = new Token(event.params.tokenId.toString());
@@ -111,13 +111,13 @@ export function handleTransferMutant(event: TransferEvent): void {
   }
 
   let baseURI = "ipfs.io/ipfs" + baseHash
-  let contentURI = "ipfs.io/ipfs/" + baseHash + event.params.tokenId.toString();
+  let contentURI = "ipfs.io/ipfs/" + baseHash + event.params.tokenId.toString() + ".json";
 
   token.contentURI = contentURI;
   token.baseURI = baseURI;
-
   if (contentURI != "") {
-    let data = ipfs.cat(baseHash)
+    let hash = baseHash + "/" + event.params.tokenId.toString() + ".json"
+    let data = ipfs.cat(hash)
     
     if (!data) return
     let value = json.fromBytes(data!).toObject()
