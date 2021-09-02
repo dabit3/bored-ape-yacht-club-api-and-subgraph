@@ -59,7 +59,7 @@ export function handleTransferApe(event: TransferEvent): void {
         let value = item.get('value').toString()
 
         if (trait == "Mouth") {
-          token.mouth = 'Bored Cigarette'
+          token.mouth = value
         }
 
         if (trait == "Eyes") {
@@ -133,7 +133,7 @@ export function handleTransferMutant(event: TransferEvent): void {
         let value = item.get('value').toString()
 
         if (trait == "Mouth") {
-          token.mouth = 'Bored Cigarette'
+          token.mouth = value
         }
 
         if (trait == "Eyes") {
