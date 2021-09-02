@@ -3,7 +3,7 @@ schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Token
+    name: BToken
     network: mainnet
     source:
       address: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
@@ -18,8 +18,29 @@ dataSources:
         - User
       abis:
         - name: Token
-          file: Token/abis/Token.json
+          file: BToken/abis/Token.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
-      file: Token/Token.wasm
+          handler: handleTransferApe
+      file: BToken/BToken.wasm
+  - kind: ethereum/contract
+    name: MToken
+    network: mainnet
+    source:
+      address: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
+      abi: Token
+      startBlock: 13117018
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - User
+      abis:
+        - name: Token
+          file: MToken/abis/Token.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransferMutant
+      file: BToken/BToken.wasm

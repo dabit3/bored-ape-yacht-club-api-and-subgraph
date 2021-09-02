@@ -86,6 +86,15 @@ export class Token extends Entity {
     this.set("createdAtTimestamp", Value.fromBigInt(value));
   }
 
+  get collection(): string {
+    let value = this.get("collection");
+    return value.toString();
+  }
+
+  set collection(value: string) {
+    this.set("collection", Value.fromString(value));
+  }
+
   get eyes(): string | null {
     let value = this.get("eyes");
     if (value === null || value.kind == ValueKind.NULL) {
