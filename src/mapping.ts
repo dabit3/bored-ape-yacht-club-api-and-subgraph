@@ -101,7 +101,7 @@ export function handleTransferApe(event: TransferEvent): void {
 
 export function handleTransferMutant(event: TransferEvent): void {
 
-  let baseHash = "QmZnJuPwDRSVWrupUQFQyqPKTV9sa5gP4x6sX53ce5WMaZ"
+  let baseHash = "QmdgxwstRErriCGPBAbba3JZMRY79wefx9F2u8GVGqafLM"
   var token = Token.load(event.params.tokenId.toString());
   if (!token) {    
     token = new Token(event.params.tokenId.toString());
