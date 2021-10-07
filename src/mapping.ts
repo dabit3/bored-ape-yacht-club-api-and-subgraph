@@ -7,7 +7,7 @@ import {
  Token, User
 } from '../generated/schema'
 
-import { ipfs, json } from '@graphprotocol/graph-ts'
+import { ipfs, json, JSONValue } from '@graphprotocol/graph-ts'
  
 export function handleTransferApe(event: TransferEvent): void {
  let baseHash = "QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq"
@@ -46,18 +46,35 @@ export function handleTransferApe(event: TransferEvent): void {
   if (contentURI != "") {
     let hash = contentURI.split('ipfs.io/ipfs/').join('')
     let data = ipfs.cat(hash)
-    
-    if (!data) return
-    let value = json.fromBytes(data!).toObject()
 
-    if (data != null) {
-      let attributes = value.get('attributes').toArray()
+    if (!data) return
+    let value = json.fromBytes(data).toObject()
+    if (data) {
+      var image = value.get('image')
+      if (image) {
+        let h =  image.toString()
+        let imageHash = h.split('ipfs://').join('')
+        token.imageURI = 'ipfs.io/ipfs/' + imageHash
+      }
+
+      let attributes:JSONValue[]
+      let atts = value.get('attributes')
+      if (atts) {
+        attributes = atts.toArray()
+      }
 
       for (let i = 0; i < attributes.length; i++) {
         let item = attributes[i].toObject()
-        let trait = item.get('trait_type').toString()
-        let value = item.get('value').toString()
-
+        let trait:string
+        let t = item.get('trait_type')
+        if (t) {
+          t.toString()
+        }
+        let value:string
+        let v = item.get('value')
+        if (v) {
+          value = v.toString()
+        }
         if (trait == "Mouth") {
           token.mouth = value
         }
@@ -100,8 +117,7 @@ export function handleTransferApe(event: TransferEvent): void {
 }
 
 export function handleTransferMutant(event: TransferEvent): void {
-
-  let baseHash = "QmdgxwstRErriCGPBAbba3JZMRY79wefx9F2u8GVGqafLM"
+  let baseHash = "QmZ4s8oFXqbbdxM2RkvhBJd5HNG1paxXsyepCG897kWt1u"
   var token = Token.load(event.params.tokenId.toString());
   if (!token) {    
     token = new Token(event.params.tokenId.toString());
@@ -122,15 +138,34 @@ export function handleTransferMutant(event: TransferEvent): void {
     let data = ipfs.cat(hash)
     
     if (!data) return
-    let value = json.fromBytes(data!).toObject()
+    let value = json.fromBytes(data).toObject()
 
-    if (data != null) {
-      let attributes = value.get('attributes').toArray()
+    if (data) {
+      var image = value.get('image')
+      if (image) {
+        let h =  image.toString()
+        let imageHash = h.split('ipfs://').join('')
+        token.imageURI = 'ipfs.io/ipfs/' + imageHash
+      }
+      let atts = value.get('attributes')
+      let attributes:JSONValue[]
+      if (atts) {
+        attributes = atts.toArray()
+      }
 
       for (let i = 0; i < attributes.length; i++) {
         let item = attributes[i].toObject()
-        let trait = item.get('trait_type').toString()
-        let value = item.get('value').toString()
+        let t = item.get('trait_type')
+        let trait:string
+        if (t) {
+          trait = t.toString()
+        }
+        
+        let v = item.get('value')
+        let value:string
+        if (v) {
+          value = v.toString()
+        }
 
         if (trait == "Mouth") {
           token.mouth = value

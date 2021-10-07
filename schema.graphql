@@ -16,6 +16,7 @@ type Token @entity {
   id: ID!
   tokenID: BigInt!
   contentURI: String!
+  imageURI: String
   baseURI: String
   createdAtTimestamp: BigInt!
   updatedAtTimestamp: BigInt
